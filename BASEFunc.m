@@ -37,11 +37,11 @@ function [regret, activeSet] = BASEFunc(mu, K, T, M, gridType, gamma)
                 + pullNumber)) + (mean(randn(1,pullNumber)) + mu(j)) * ...,
                 (pullNumber/(numberPull(j) + pullNumber));
             regret = regret + (pullNumber * (mu(1) - mu(j)));
+            numberPull(j) = numberPull(j) + pullNumber; 
         end
         maxArm = max(averageReward(find(activeSet == 1)));
         for j = find(activeSet == 1)
-            if ((maxArm - averageReward(j)) >= gamma * sqrt(K * ...,
-                    log(T*K/TGrid(i))/TGrid(i)))
+            if ((maxArm - averageReward(j)) >= sqrt(gamma * log(T*K) / numberPull(j)))
                 activeSet(j) = 0;
             end
         end

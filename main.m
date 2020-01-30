@@ -5,7 +5,7 @@ K = 3; T = 5e4; M = 3;
 K_set = round(logspace(log10(2),log10(20),6)); 
 T_set = round(logspace(log10(500),log10(5e4),6)); 
 M_set = 2:7; 
-mu_max = 0.6; mu_min = 0.5; gamma = 1; m = 500; 
+mu_max = 0.6; mu_min = 0.5; gamma = 0.5; m = 200; 
 
 %% Experiments
 
@@ -49,6 +49,7 @@ regretGeometric_K_mean = mean(regretGeometric_K) / T;
 regretArithmetic_K_mean = mean(regretArithmetic_K) / T; 
 regretUCB_K_mean = mean(regretUCB_K) / T; 
 
+% dependence on T 
 regretMinimax_T = zeros(m,length(T_set));
 regretGeometric_T = zeros(m,length(T_set)); 
 regretArithmetic_T = zeros(m,length(T_set)); 
@@ -92,7 +93,7 @@ regretPRCSminimax_mean = mean(regretPRCSminimax) / T;
 regretPRCSGeometric_mean = mean(regretPRCSgeometric) / T; 
 regretUCB_mean = mean(regretUCB) / T; 
 
-%% Figures
+% Figures
 figure;
 plot(M_set, regretMinimax_M_mean, 'bs-', 'MarkerFaceColor','b','linewidth', 2); hold on; 
 plot(M_set, regretGeometric_M_mean, 'ro--', 'MarkerFaceColor','r','linewidth', 2);
